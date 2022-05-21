@@ -71,9 +71,101 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Research-Plan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-JUnit-Mockito-Experiment" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/05/19/Research-Plan/" class="article-date">
+    <a href="/2022/05/22/JUnit-Mockito-Experiment/" class="article-date">
+  <time class="dt-published" datetime="2022-05-21T17:19:20.000Z" itemprop="datePublished">2022-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E9%AA%8C/">实验</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/05/22/JUnit-Mockito-Experiment/">JUnit Mockito 实验</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="JUnit-Mockito-使用手册"><a href="#JUnit-Mockito-使用手册" class="headerlink" title="JUnit Mockito 使用手册"></a>JUnit Mockito 使用手册</h2><h3 id="1-依赖"><a href="#1-依赖" class="headerlink" title="1 依赖"></a>1 依赖</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    testCompile(&#x27;org.mockito:mockito-core:3.8.0&#x27;)</span><br><span class="line">    testCompile(&#x27;org.mockito:mockito-inline:3.8.0&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">configurations &#123;</span><br><span class="line">    testCompile.resolutionStrategy &#123;</span><br><span class="line">        force &#x27;org.mockito:mockito-core:3.8.0&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-示例"><a href="#2-示例" class="headerlink" title="2 示例"></a>2 示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserTest</span> &#123;</span><br><span class="line">    <span class="meta">@MockBean</span></span><br><span class="line">    <span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@InjectMocks</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">UserService</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserService</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="variable">setUpIsDone</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        MockitoAnnotations.openMocks(<span class="built_in">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!setUpIsDone) &#123;</span><br><span class="line">            <span class="comment">// 静态方法 mock</span></span><br><span class="line">            MockedStatic&lt;SnGenerator&gt; snGenerator = Mockito.mockStatic(SnGenerator.class);</span><br><span class="line">            snGenerator.when(() -&gt; SnGenerator.gen(Mockito.anyString())).thenReturn(<span class="string">&quot;abc123&quot;</span>);</span><br><span class="line">            setUpIsDone = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 实例方法 mock</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        user.setId(<span class="number">1L</span>);</span><br><span class="line">        user.setNickName(<span class="string">&quot;fz&quot;</span>);</span><br><span class="line">        Mockito.doReturn(user).when(userRepository).getOne(<span class="number">1L</span>);</span><br><span class="line">        Mockito.doReturn(user).when(userRepository).save(Mockito.any());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUser_get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">UserDTO</span> <span class="variable">userDTO</span> <span class="operator">=</span> userService.getUserById(<span class="number">1L</span>);</span><br><span class="line">        Assert.isTrue(userDTO.getId().equals(<span class="number">1L</span>), <span class="string">&quot;User id not match&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUser_save</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">UserDTO</span> <span class="variable">userDTO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserDTO</span>();</span><br><span class="line">        userDTO.setId(<span class="number">1L</span>);</span><br><span class="line">        userDTO.setNickName(<span class="string">&quot;fz&quot;</span>);</span><br><span class="line">        userDTO = userService.createUser(userDTO);</span><br><span class="line">        Assert.isTrue(userDTO.getId().equals(<span class="number">1L</span>), <span class="string">&quot;User id not match&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://findxyz.github.io/2022/05/22/JUnit-Mockito-Experiment/" data-id="cl3g4wzps0004fsvcfeeo1sy6" data-title="JUnit Mockito 实验" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Gradle-Experiment" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/22/Gradle-Experiment/" class="article-date">
+  <time class="dt-published" datetime="2022-05-21T17:14:18.000Z" itemprop="datePublished">2022-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E9%AA%8C/">实验</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/05/22/Gradle-Experiment/">Gradle 实验</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>​<img src="\assert\puml\15972964e017ba24f365a8062b6a7384b25666d7a5c11a18072ee9786ce568c8.svg"/></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://findxyz.github.io/2022/05/22/Gradle-Experiment/" data-id="cl3g4r4880004tovchpggd9e8" data-title="Gradle 实验" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Easy-Codec" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/19/Easy-Codec/" class="article-date">
   <time class="dt-published" datetime="2022-05-19T13:32:08.000Z" itemprop="datePublished">2022-05-19</time>
 </a>
     
@@ -89,7 +181,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/19/Research-Plan/">探索计划</a>
+      <a class="p-name article-title" href="/2022/05/19/Easy-Codec/">编解码探索</a>
     </h1>
   
 
@@ -97,30 +189,72 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <table>
-<thead>
-<tr>
-<th align="left">实验名称</th>
-<th align="left">目的</th>
-<th align="left">进度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">自动化任务</td>
-<td align="left">通过程序自动化处理一些重复事务</td>
-<td align="left">1%</td>
-</tr>
-<tr>
-<td align="left">简单编解码</td>
-<td align="left">简单快捷可重复的使用同一套编解码规则</td>
-<td align="left">1%</td>
-</tr>
-</tbody></table>
+        <h2 id="如何设计一套简单的、易于理解的、可重复使用的编解码规则？"><a href="#如何设计一套简单的、易于理解的、可重复使用的编解码规则？" class="headerlink" title="如何设计一套简单的、易于理解的、可重复使用的编解码规则？"></a>如何设计一套简单的、易于理解的、可重复使用的编解码规则？</h2><p>​<img src="\assert\puml\11d2205111963b3b937788e63d7903396172d4e470399e0576d7fac35fe90bf4.svg"/></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://findxyz.github.io/2022/05/19/Research-Plan/" data-id="cl3d2qqxc00068wvc55ej5yej" data-title="探索计划" class="article-share-link">分享</a>
+      <a data-url="https://findxyz.github.io/2022/05/19/Easy-Codec/" data-id="cl3g3ffa500004svc6g39b5nk" data-title="编解码探索" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Auto-Mission" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/19/Auto-Mission/" class="article-date">
+  <time class="dt-published" datetime="2022-05-19T13:32:08.000Z" itemprop="datePublished">2022-05-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/05/19/Auto-Mission/">自动化探索</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="如何使重复的工作变得简单？"><a href="#如何使重复的工作变得简单？" class="headerlink" title="如何使重复的工作变得简单？"></a>如何使重复的工作变得简单？</h2><p>​<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="190px" preserveAspectRatio="none" style="width:214px;height:190px;background:#FFFFFF;" version="1.1" viewBox="0 0 214 190" width="214px" zoomAndPan="magnify"><defs/><g><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="74" x="10" y="76.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54" x="20" y="99.292">mission</text><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="50" x="134" y="20"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="144" y="42.9951">args</text><path d="M84,94.4453 L94,94.4453 C109,94.4453 109,38.1484 124,38.1484 L134,38.1484 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="58" x="134" y="76.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="144" y="99.292">tasks</text><path d="M84,94.4453 L94,94.4453 C109,94.4453 109,94.4453 124,94.4453 L134,94.4453 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="68" x="134" y="132.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="144" y="155.5889">results</text><path d="M84,94.4453 L94,94.4453 C109,94.4453 109,150.7422 124,150.7422 L134,150.7422 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><!--MD5=[e373413523eefc5cf02d62be2f679263]
+@startmindmap auto-mission
+
+* mission
+** args
+** tasks
+** results
+
+@endmindmap
+
+PlantUML version 1.2022.6beta1(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://findxyz.github.io/2022/05/19/Auto-Mission/" data-id="cl3g3sr4v00044svc20w705ik" data-title="自动化探索" class="article-share-link">分享</a>
       
       
       
@@ -204,12 +338,47 @@
 <tr>
 <td align="left">经济学原理（第七版）微观经济学</td>
 <td align="left">电子书</td>
-<td align="left">1%</td>
+<td align="left">5%</td>
 </tr>
 <tr>
 <td align="left">经济学原理（第七版）宏观经济学</td>
 <td align="left">电子书</td>
 <td align="left">1%</td>
+</tr>
+<tr>
+<td align="left">姜承尧的MySQL实战宝典</td>
+<td align="left">网络课程</td>
+<td align="left">100%</td>
+</tr>
+<tr>
+<td align="left">林晓斌的MySQL实战45讲</td>
+<td align="left">网络课程</td>
+<td align="left">45%</td>
+</tr>
+<tr>
+<td align="left">EliasticSearch核心技术与实战</td>
+<td align="left">网络课程</td>
+<td align="left">56%</td>
+</tr>
+<tr>
+<td align="left">消息队列高手课</td>
+<td align="left">网络课程</td>
+<td align="left">59%</td>
+</tr>
+<tr>
+<td align="left">趣谈网络协议</td>
+<td align="left">网络课程</td>
+<td align="left">35%</td>
+</tr>
+<tr>
+<td align="left">Linux就是这个范儿</td>
+<td align="left">实体书</td>
+<td align="left">10%</td>
+</tr>
+<tr>
+<td align="left">Gradle实战</td>
+<td align="left">电子书</td>
+<td align="left">60%</td>
 </tr>
 </tbody></table>
 
@@ -262,11 +431,13 @@
 
 <h3 id="8、创建-Hexo-博客"><a href="#8、创建-Hexo-博客" class="headerlink" title="8、创建 Hexo 博客"></a>8、创建 Hexo 博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
 
-<h3 id="9、配置-Hexo-博客"><a href="#9、配置-Hexo-博客" class="headerlink" title="9、配置 Hexo 博客"></a>9、配置 Hexo 博客</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">修改 blog/_config.yml 配置</span><br><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: FindxyZ</span><br><span class="line">subtitle: &#x27;&#x27;</span><br><span class="line">description: &#x27;&#x27;</span><br><span class="line">keywords:</span><br><span class="line">author: FindxyZ</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: &#x27;&#x27;</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://findxyz.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:findxyz/findxyz.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h3 id="9、配置-Hexo-博客"><a href="#9、配置-Hexo-博客" class="headerlink" title="9、配置 Hexo 博客"></a>9、配置 Hexo 博客</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">修改 blog/_config.yml 配置</span><br><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: FindxyZ</span><br><span class="line">subtitle: &#x27;&#x27;</span><br><span class="line">description: &#x27;&#x27;</span><br><span class="line">keywords:</span><br><span class="line">author: FindxyZ</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: &#x27;&#x27;</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://findxyz.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:findxyz/findxyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line">plantuml:</span><br><span class="line">  #  Local or PlantUMLServer.</span><br><span class="line">  render: &quot;PlantUMLServer&quot;</span><br><span class="line"></span><br><span class="line">  # The render server, you can also create your self-hosting sever</span><br><span class="line">  # self-hosting cmd: java -jar /usr/local/Cellar/plantuml/1.2021.5/libexec/plantuml.jar -picoweb</span><br><span class="line">  # server: http://localhost:8080/plantuml</span><br><span class="line">  server: &quot;http://www.plantuml.com/plantuml&quot;</span><br><span class="line">  # &quot;inline&quot;: &lt;svg&gt;xxx&lt;svg/&gt;</span><br><span class="line">  # &quot;inlineUrlEncode&quot;: &lt;img src=&#x27;data:image/svg+xml;&gt;</span><br><span class="line">  # &quot;inlineBase64&quot;: &lt;img src=&#x27;data:image/svg+xml;base64&gt;</span><br><span class="line">  # &quot;localLink&quot;: &lt;img src=&quot;/assert/puml/xxxx.svg&quot;&gt;</span><br><span class="line">  # &quot;externalLink&quot;: &lt;img src=&quot;http://www.plantuml.com/plantuml/svg/xxx&quot;&gt;</span><br><span class="line">  link: &quot;localLink&quot;</span><br><span class="line"></span><br><span class="line">  # common options: svg/png</span><br><span class="line">  outputFormat: &quot;svg&quot;</span><br></pre></td></tr></table></figure>
 
 <h3 id="10、安装-Hexo-部署工具"><a href="#10、安装-Hexo-部署工具" class="headerlink" title="10、安装 Hexo 部署工具"></a>10、安装 Hexo 部署工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
-<h3 id="11、Hexo-基础命令"><a href="#11、Hexo-基础命令" class="headerlink" title="11、Hexo 基础命令"></a>11、Hexo 基础命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment"># 清理生成</span></span><br><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 启动服务</span></span><br><span class="line">hexo d <span class="comment"># 上传</span></span><br><span class="line">hexo new <span class="string">&#x27;new-blog&#x27;</span> <span class="comment"># 新博客</span></span><br><span class="line">blog/source/_posts <span class="comment"># 博客目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="11、安装-Hexo-PlantUML-工具"><a href="#11、安装-Hexo-PlantUML-工具" class="headerlink" title="11、安装 Hexo PlantUML 工具"></a>11、安装 Hexo PlantUML 工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-filter-plantuml</span><br></pre></td></tr></table></figure>
+
+<h3 id="12、Hexo-基础命令"><a href="#12、Hexo-基础命令" class="headerlink" title="12、Hexo 基础命令"></a>12、Hexo 基础命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment"># 清理生成</span></span><br><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 启动服务</span></span><br><span class="line">hexo d <span class="comment"># 上传</span></span><br><span class="line">hexo new <span class="string">&#x27;new-blog&#x27;</span> <span class="comment"># 新博客</span></span><br><span class="line">blog/source/_posts <span class="comment"># 博客目录</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -294,7 +465,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%8C%85/">书包</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%8C%85/">书包</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E9%AA%8C/">实验</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a></li></ul>
     </div>
   </div>
 
@@ -322,15 +493,23 @@
       <ul>
         
           <li>
-            <a href="/2022/05/19/Research-Plan/">探索计划</a>
+            <a href="/2022/05/22/JUnit-Mockito-Experiment/">JUnit Mockito 实验</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/22/Gradle-Experiment/">Gradle 实验</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/19/Easy-Codec/">编解码探索</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/19/Auto-Mission/">自动化探索</a>
           </li>
         
           <li>
             <a href="/2022/05/19/Read-Plan/">读书计划</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/18/Hexo-World/">你好 Hexo</a>
           </li>
         
       </ul>

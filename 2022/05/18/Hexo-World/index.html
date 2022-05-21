@@ -14,7 +14,7 @@
 <meta property="og:description" content="搭建 Github Hexo 博客1、注册 Github 账号2、安装 Node.js3、安装 git4、新建 你的用户名.github.io 仓库5、生成 ssh key1ssh-keygen -t rsa -C &quot;邮件地址&quot;  6、在 Github 添加 ssh pub key1https:&#x2F;&#x2F;github.com&#x2F;settings&#x2F;keys  7、安装 Hexo1npm">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-18T12:52:25.000Z">
-<meta property="article:modified_time" content="2022-05-19T13:33:04.158Z">
+<meta property="article:modified_time" content="2022-05-21T17:09:58.107Z">
 <meta property="article:author" content="FindxyZ">
 <meta name="twitter:card" content="summary">
   
@@ -107,11 +107,13 @@
 
 <h3 id="8、创建-Hexo-博客"><a href="#8、创建-Hexo-博客" class="headerlink" title="8、创建 Hexo 博客"></a>8、创建 Hexo 博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
 
-<h3 id="9、配置-Hexo-博客"><a href="#9、配置-Hexo-博客" class="headerlink" title="9、配置 Hexo 博客"></a>9、配置 Hexo 博客</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">修改 blog/_config.yml 配置</span><br><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: FindxyZ</span><br><span class="line">subtitle: &#x27;&#x27;</span><br><span class="line">description: &#x27;&#x27;</span><br><span class="line">keywords:</span><br><span class="line">author: FindxyZ</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: &#x27;&#x27;</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://findxyz.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:findxyz/findxyz.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h3 id="9、配置-Hexo-博客"><a href="#9、配置-Hexo-博客" class="headerlink" title="9、配置 Hexo 博客"></a>9、配置 Hexo 博客</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">修改 blog/_config.yml 配置</span><br><span class="line"></span><br><span class="line"># Site</span><br><span class="line">title: FindxyZ</span><br><span class="line">subtitle: &#x27;&#x27;</span><br><span class="line">description: &#x27;&#x27;</span><br><span class="line">keywords:</span><br><span class="line">author: FindxyZ</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: &#x27;&#x27;</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://findxyz.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:findxyz/findxyz.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line">plantuml:</span><br><span class="line">  #  Local or PlantUMLServer.</span><br><span class="line">  render: &quot;PlantUMLServer&quot;</span><br><span class="line"></span><br><span class="line">  # The render server, you can also create your self-hosting sever</span><br><span class="line">  # self-hosting cmd: java -jar /usr/local/Cellar/plantuml/1.2021.5/libexec/plantuml.jar -picoweb</span><br><span class="line">  # server: http://localhost:8080/plantuml</span><br><span class="line">  server: &quot;http://www.plantuml.com/plantuml&quot;</span><br><span class="line">  # &quot;inline&quot;: &lt;svg&gt;xxx&lt;svg/&gt;</span><br><span class="line">  # &quot;inlineUrlEncode&quot;: &lt;img src=&#x27;data:image/svg+xml;&gt;</span><br><span class="line">  # &quot;inlineBase64&quot;: &lt;img src=&#x27;data:image/svg+xml;base64&gt;</span><br><span class="line">  # &quot;localLink&quot;: &lt;img src=&quot;/assert/puml/xxxx.svg&quot;&gt;</span><br><span class="line">  # &quot;externalLink&quot;: &lt;img src=&quot;http://www.plantuml.com/plantuml/svg/xxx&quot;&gt;</span><br><span class="line">  link: &quot;localLink&quot;</span><br><span class="line"></span><br><span class="line">  # common options: svg/png</span><br><span class="line">  outputFormat: &quot;svg&quot;</span><br></pre></td></tr></table></figure>
 
 <h3 id="10、安装-Hexo-部署工具"><a href="#10、安装-Hexo-部署工具" class="headerlink" title="10、安装 Hexo 部署工具"></a>10、安装 Hexo 部署工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
-<h3 id="11、Hexo-基础命令"><a href="#11、Hexo-基础命令" class="headerlink" title="11、Hexo 基础命令"></a>11、Hexo 基础命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment"># 清理生成</span></span><br><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 启动服务</span></span><br><span class="line">hexo d <span class="comment"># 上传</span></span><br><span class="line">hexo new <span class="string">&#x27;new-blog&#x27;</span> <span class="comment"># 新博客</span></span><br><span class="line">blog/source/_posts <span class="comment"># 博客目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="11、安装-Hexo-PlantUML-工具"><a href="#11、安装-Hexo-PlantUML-工具" class="headerlink" title="11、安装 Hexo PlantUML 工具"></a>11、安装 Hexo PlantUML 工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-filter-plantuml</span><br></pre></td></tr></table></figure>
+
+<h3 id="12、Hexo-基础命令"><a href="#12、Hexo-基础命令" class="headerlink" title="12、Hexo 基础命令"></a>12、Hexo 基础命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment"># 清理生成</span></span><br><span class="line">hexo g <span class="comment"># 生成</span></span><br><span class="line">hexo s <span class="comment"># 启动服务</span></span><br><span class="line">hexo d <span class="comment"># 上传</span></span><br><span class="line">hexo new <span class="string">&#x27;new-blog&#x27;</span> <span class="comment"># 新博客</span></span><br><span class="line">blog/source/_posts <span class="comment"># 博客目录</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -151,7 +153,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%8C%85/">书包</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B9%A6%E5%8C%85/">书包</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E9%AA%8C/">实验</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%A2%E7%B4%A2/">探索</a></li></ul>
     </div>
   </div>
 
@@ -179,15 +181,23 @@
       <ul>
         
           <li>
-            <a href="/2022/05/19/Research-Plan/">探索计划</a>
+            <a href="/2022/05/22/JUnit-Mockito-Experiment/">JUnit Mockito 实验</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/22/Gradle-Experiment/">Gradle 实验</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/19/Easy-Codec/">编解码探索</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/19/Auto-Mission/">自动化探索</a>
           </li>
         
           <li>
             <a href="/2022/05/19/Read-Plan/">读书计划</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/18/Hexo-World/">你好 Hexo</a>
           </li>
         
       </ul>
