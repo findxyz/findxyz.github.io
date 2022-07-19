@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>读书计划 | FindxyZ</title>
+  <title>MQTT 实验 | FindxyZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="书名 类型 进度    Python黑帽子 实体书 10%   深入理解SpringCloud与实战 实体书 5%   高性能MySQL 实体书 20%   架构整洁之道 实体书 100%   看漫画学Python 电子书 100%   秒懂设计模式 电子书 100%   重构2 电子书 1%   经济学原理（第七版）微观经济学 电子书 20%   经济学原理（第七版）宏观经济学 电子书 1">
+  <meta name="description" content="MQTT 在 RabbitMQ 中的使用1 开启 MQTT 插件12rabbitmq-plugins enable rabbitmq_mqtt &#x2F;&#x2F; 开启 rabbitmq_mqtt 对应端口 1883rabbitmq-plugins enable rabbitmq_web_mqtt &#x2F;&#x2F; 开启 rabbitmq_web_mqtt 对应端口 15675 开启后可以在 RabbitMQ 控制台的 O">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读书计划">
-<meta property="og:url" content="https://findxyz.github.io/2022/05/19/Book/Read-Plan/index.html">
+<meta property="og:title" content="MQTT 实验">
+<meta property="og:url" content="https://findxyz.github.io/2022/07/08/Lab/MQTT/index.html">
 <meta property="og:site_name" content="FindxyZ">
-<meta property="og:description" content="书名 类型 进度    Python黑帽子 实体书 10%   深入理解SpringCloud与实战 实体书 5%   高性能MySQL 实体书 20%   架构整洁之道 实体书 100%   看漫画学Python 电子书 100%   秒懂设计模式 电子书 100%   重构2 电子书 1%   经济学原理（第七版）微观经济学 电子书 20%   经济学原理（第七版）宏观经济学 电子书 1">
+<meta property="og:description" content="MQTT 在 RabbitMQ 中的使用1 开启 MQTT 插件12rabbitmq-plugins enable rabbitmq_mqtt &#x2F;&#x2F; 开启 rabbitmq_mqtt 对应端口 1883rabbitmq-plugins enable rabbitmq_web_mqtt &#x2F;&#x2F; 开启 rabbitmq_web_mqtt 对应端口 15675 开启后可以在 RabbitMQ 控制台的 O">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-19T13:12:53.000Z">
+<meta property="article:published_time" content="2022-07-08T06:45:20.000Z">
 <meta property="article:modified_time" content="2022-07-19T13:29:25.102Z">
 <meta property="article:author" content="FindxyZ">
+<meta property="article:tag" content="MQTT">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="FindxyZ" type="application/atom+xml">
@@ -73,14 +74,14 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Book/Read-Plan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Lab/MQTT" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/05/19/Book/Read-Plan/" class="article-date">
-  <time class="dt-published" datetime="2022-05-19T13:12:53.000Z" itemprop="datePublished">2022-05-19</time>
+    <a href="/2022/07/08/Lab/MQTT/" class="article-date">
+  <time class="dt-published" datetime="2022-07-08T06:45:20.000Z" itemprop="datePublished">2022-07-08</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%B9%A6%E5%8C%85/">书包</a>
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E9%AA%8C%E5%AE%A4/">实验室</a>
   </div>
 
   </div>
@@ -91,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      读书计划
+      MQTT 实验
     </h1>
   
 
@@ -99,157 +100,29 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <table>
-<thead>
-<tr>
-<th align="left">书名</th>
-<th align="left">类型</th>
-<th align="left">进度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">Python黑帽子</td>
-<td align="left">实体书</td>
-<td align="left">10%</td>
-</tr>
-<tr>
-<td align="left">深入理解SpringCloud与实战</td>
-<td align="left">实体书</td>
-<td align="left">5%</td>
-</tr>
-<tr>
-<td align="left">高性能MySQL</td>
-<td align="left">实体书</td>
-<td align="left">20%</td>
-</tr>
-<tr>
-<td align="left">架构整洁之道</td>
-<td align="left">实体书</td>
-<td align="left">100%</td>
-</tr>
-<tr>
-<td align="left">看漫画学Python</td>
-<td align="left">电子书</td>
-<td align="left">100%</td>
-</tr>
-<tr>
-<td align="left">秒懂设计模式</td>
-<td align="left">电子书</td>
-<td align="left">100%</td>
-</tr>
-<tr>
-<td align="left">重构2</td>
-<td align="left">电子书</td>
-<td align="left">1%</td>
-</tr>
-<tr>
-<td align="left">经济学原理（第七版）微观经济学</td>
-<td align="left">电子书</td>
-<td align="left">20%</td>
-</tr>
-<tr>
-<td align="left">经济学原理（第七版）宏观经济学</td>
-<td align="left">电子书</td>
-<td align="left">1%</td>
-</tr>
-<tr>
-<td align="left">姜承尧的MySQL实战宝典</td>
-<td align="left">网络课程</td>
-<td align="left">100%</td>
-</tr>
-<tr>
-<td align="left">林晓斌的MySQL实战45讲</td>
-<td align="left">网络课程</td>
-<td align="left">46%</td>
-</tr>
-<tr>
-<td align="left">EliasticSearch核心技术与实战</td>
-<td align="left">网络课程</td>
-<td align="left">56%</td>
-</tr>
-<tr>
-<td align="left">消息队列高手课</td>
-<td align="left">网络课程</td>
-<td align="left">59%</td>
-</tr>
-<tr>
-<td align="left">趣谈网络协议</td>
-<td align="left">网络课程</td>
-<td align="left">35%</td>
-</tr>
-<tr>
-<td align="left">Linux就是这个范儿</td>
-<td align="left">实体书</td>
-<td align="left">10%</td>
-</tr>
-<tr>
-<td align="left">Gradle实战</td>
-<td align="left">电子书</td>
-<td align="left">60%</td>
-</tr>
-<tr>
-<td align="left">微服务架构设计模式</td>
-<td align="left">电子书</td>
-<td align="left">0%</td>
-</tr>
-<tr>
-<td align="left">Jenkins2.X实践指南</td>
-<td align="left">电子书</td>
-<td align="left">70%</td>
-</tr>
-<tr>
-<td align="left">卓有成效的管理者</td>
-<td align="left">电子书</td>
-<td align="left">1%</td>
-</tr>
-<tr>
-<td align="left">HBase原理与实践</td>
-<td align="left">电子书</td>
-<td align="left">50%</td>
-</tr>
-<tr>
-<td align="left">明朝那些事儿</td>
-<td align="left">电子书</td>
-<td align="left">12%</td>
-</tr>
-<tr>
-<td align="left">怪诞行为学</td>
-<td align="left">电子书</td>
-<td align="left">30%</td>
-</tr>
-<tr>
-<td align="left">ClickHouse原理解析与应用实践</td>
-<td align="left">电子书</td>
-<td align="left">40%</td>
-</tr>
-</tbody></table>
+        <h2 id="MQTT-在-RabbitMQ-中的使用"><a href="#MQTT-在-RabbitMQ-中的使用" class="headerlink" title="MQTT 在 RabbitMQ 中的使用"></a>MQTT 在 RabbitMQ 中的使用</h2><h3 id="1-开启-MQTT-插件"><a href="#1-开启-MQTT-插件" class="headerlink" title="1 开启 MQTT 插件"></a>1 开启 MQTT 插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_mqtt // 开启 rabbitmq_mqtt 对应端口 1883</span><br><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_web_mqtt // 开启 rabbitmq_web_mqtt 对应端口 15675</span><br></pre></td></tr></table></figure>
+<p>开启后可以在 RabbitMQ 控制台的 Overview 中的 Ports and contexts 中查看到</p>
+<h3 id="2-创建一个类型为-topic-的交换机-MQTT"><a href="#2-创建一个类型为-topic-的交换机-MQTT" class="headerlink" title="2 创建一个类型为 topic 的交换机 MQTT"></a>2 创建一个类型为 topic 的交换机 MQTT</h3><h3 id="3-使用-MQTTX-客户端进行测试-下载地址"><a href="#3-使用-MQTTX-客户端进行测试-下载地址" class="headerlink" title="3 使用 MQTTX 客户端进行测试 下载地址"></a>3 使用 MQTTX 客户端进行测试 <a target="_blank" rel="noopener" href="https://mqttx.app/zh">下载地址</a></h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/motion/p/14974024.html">参考链接：使用RabbitMQ搭建MQTT服务</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://findxyz.github.io/2022/05/19/Book/Read-Plan/" data-id="cl5s9olqf0000c4vcex5ydgb1" data-title="读书计划" class="article-share-link">分享</a>
+      <a data-url="https://findxyz.github.io/2022/07/08/Lab/MQTT/" data-id="cl5s9olqq000bc4vc92o15loj" data-title="MQTT 实验" class="article-share-link">分享</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MQTT/" rel="tag">MQTT</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2022/05/19/Research/Easy-Codec/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          编解码探索
-        
-      </div>
-    </a>
   
-  
-    <a href="/2022/05/18/Front/Hexo-World/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/05/30/Lab/Jenkins/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">你好 Hexo</div>
+      <div class="article-nav-title">Jenkins 实验</div>
     </a>
   
 </nav>
