@@ -27,11 +27,14 @@
 <meta property="og:site_name" content="FindxyZ">
 <meta property="og:description" content="概述1网络爬虫是模拟浏览器发送网络请求，接收请求响应，按照一定的规则，自动地抓取互联网信息的程序。  功能静态参数生成12爬虫通常需要对目标进行多次请求，且每次请求包含不同目的的请求参数，所以参数方便的生成可以对之后的请求阶段将有很大的帮助。  静态参数数据源12生成的参数可能会使用多次（例如：城市坐标点），所以将参数进行保存，方便其他爬虫任务使用。  动态参数12爬虫的请求经常会遇到需要 tok">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://findxyz.github.io/assert/puml/a7dd4372c5f70ca0afc6e84959da8bb34e58257c1098250e5537bfe2042fc0f2.svg">
+<meta property="og:image" content="https://findxyz.github.io/assert/puml/345eb79bb1b9b975e3bb9e6cdf4795a0195e4c9142ab42ca8835ce4a616fc0d9.svg">
 <meta property="article:published_time" content="2022-09-25T03:26:53.000Z">
-<meta property="article:modified_time" content="2022-09-25T13:20:21.976Z">
+<meta property="article:modified_time" content="2022-10-05T13:19:40.908Z">
 <meta property="article:author" content="FindxyZ">
 <meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://findxyz.github.io/assert/puml/a7dd4372c5f70ca0afc6e84959da8bb34e58257c1098250e5537bfe2042fc0f2.svg">
 
 <link rel="canonical" href="https://findxyz.github.io/2022/09/25/Research/%E7%88%AC%E8%99%AB%E9%9A%8F%E6%83%B3/">
 
@@ -173,10 +176,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-09-25 11:26:53 / 修改时间：21:20:21" itemprop="dateCreated datePublished" datetime="2022-09-25T11:26:53+08:00">2022-09-25</time>
+              <time title="创建时间：2022-09-25 11:26:53" itemprop="dateCreated datePublished" datetime="2022-09-25T11:26:53+08:00">2022-09-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-05 21:19:40" itemprop="dateModified" datetime="2022-10-05T21:19:40+08:00">2022-10-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -220,6 +229,209 @@
 
 <h2 id="爬虫结果处理"><a href="#爬虫结果处理" class="headerlink" title="爬虫结果处理"></a>爬虫结果处理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">爬虫爬取后的数据要经过筛选与处理，最后保存为爬取结果。</span><br></pre></td></tr></table></figure>
 
+<h1 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h1><h2 id="param-summary-参数概览"><a href="#param-summary-参数概览" class="headerlink" title="param_summary 参数概览"></a>param_summary 参数概览</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARCHAR</td>
+<td>参数类型，static 静态参数，dynamic 动态参数</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>参数名称</td>
+</tr>
+<tr>
+<td>count</td>
+<td>INT</td>
+<td>参数数量</td>
+</tr>
+<tr>
+<td>is_enabled</td>
+<td>BOOLEAN</td>
+<td>是否有效</td>
+</tr>
+</tbody></table>
+<h2 id="param-参数"><a href="#param-参数" class="headerlink" title="param 参数"></a>param 参数</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>参数名称</td>
+</tr>
+<tr>
+<td>content</td>
+<td>VARCHAR</td>
+<td>参数内容</td>
+</tr>
+<tr>
+<td>seq_no</td>
+<td>INT</td>
+<td>序号</td>
+</tr>
+</tbody></table>
+<h2 id="task-任务"><a href="#task-任务" class="headerlink" title="task 任务"></a>task 任务</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARCHAR</td>
+<td>任务类型，collect 数据采集，fight 资源争夺</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>static_param</td>
+<td>VARCHAR</td>
+<td>静态参数</td>
+</tr>
+<tr>
+<td>dynamic_param</td>
+<td>VARCHAR</td>
+<td>动态参数</td>
+</tr>
+<tr>
+<td>repeat_times</td>
+<td>INT</td>
+<td>重复次数</td>
+</tr>
+<tr>
+<td>is_enabled</td>
+<td>BOOLEAN</td>
+<td>是否有效</td>
+</tr>
+</tbody></table>
+<h2 id="task-script-任务脚本"><a href="#task-script-任务脚本" class="headerlink" title="task_script 任务脚本"></a>task_script 任务脚本</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>task_name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>content</td>
+<td>VARCHAR</td>
+<td>脚本内容</td>
+</tr>
+</tbody></table>
+<h2 id="task-query-任务请求"><a href="#task-query-任务请求" class="headerlink" title="task_query 任务请求"></a>task_query 任务请求</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>task_name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>static_param</td>
+<td>VARCHAR</td>
+<td>静态参数</td>
+</tr>
+<tr>
+<td>static_seq_no</td>
+<td>INT</td>
+<td>静态参数序号</td>
+</tr>
+<tr>
+<td>dynamic_param</td>
+<td>VARCHAR</td>
+<td>静态参数</td>
+</tr>
+<tr>
+<td>status</td>
+<td>VARCHAR</td>
+<td>请求状态，init 待请求，success 请求成功，failure 请求失败</td>
+</tr>
+<tr>
+<td>remark</td>
+<td>VARCHAR</td>
+<td>备注，失败原因等</td>
+</tr>
+</tbody></table>
+<h2 id="task-result-任务结果"><a href="#task-result-任务结果" class="headerlink" title="task_result 任务结果"></a>task_result 任务结果</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>task_name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>result</td>
+<td>VARCHAR</td>
+<td>任务结果</td>
+</tr>
+</tbody></table>
+<img src="\assert\puml\a7dd4372c5f70ca0afc6e84959da8bb34e58257c1098250e5537bfe2042fc0f2.svg"/>
+
+
+<p>​<img src="\assert\puml\345eb79bb1b9b975e3bb9e6cdf4795a0195e4c9142ab42ca8835ce4a616fc0d9.svg"/></p>
 
     </div>
 
@@ -300,7 +512,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%82%E6%95%B0%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">静态参数生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%82%E6%95%B0%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">2.2.</span> <span class="nav-text">静态参数数据源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">动态参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E4%BB%A3%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">动态参数代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E4%BB%A3%E7%90%86"><span class="nav-number">2.5.</span> <span class="nav-text">爬虫代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.</span> <span class="nav-text">爬虫任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E9%93%BE"><span class="nav-number">2.6.1.</span> <span class="nav-text">任务链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.2.</span> <span class="nav-text">请求任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.3.</span> <span class="nav-text">处理任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86"><span class="nav-number">2.7.</span> <span class="nav-text">爬虫结果处理</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%82%E6%95%B0%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">静态参数生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%82%E6%95%B0%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">2.2.</span> <span class="nav-text">静态参数数据源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">动态参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E4%BB%A3%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">动态参数代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E4%BB%A3%E7%90%86"><span class="nav-number">2.5.</span> <span class="nav-text">爬虫代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.</span> <span class="nav-text">爬虫任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E9%93%BE"><span class="nav-number">2.6.1.</span> <span class="nav-text">任务链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.2.</span> <span class="nav-text">请求任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.6.3.</span> <span class="nav-text">处理任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E7%BB%93%E6%9E%9C%E5%A4%84%E7%90%86"><span class="nav-number">2.7.</span> <span class="nav-text">爬虫结果处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#param-summary-%E5%8F%82%E6%95%B0%E6%A6%82%E8%A7%88"><span class="nav-number">3.1.</span> <span class="nav-text">param_summary 参数概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#param-%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">param 参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#task-%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.3.</span> <span class="nav-text">task 任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#task-script-%E4%BB%BB%E5%8A%A1%E8%84%9A%E6%9C%AC"><span class="nav-number">3.4.</span> <span class="nav-text">task_script 任务脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#task-query-%E4%BB%BB%E5%8A%A1%E8%AF%B7%E6%B1%82"><span class="nav-number">3.5.</span> <span class="nav-text">task_query 任务请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#task-result-%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9E%9C"><span class="nav-number">3.6.</span> <span class="nav-text">task_result 任务结果</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

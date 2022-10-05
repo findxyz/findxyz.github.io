@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-09-25 11:26:53 / 修改时间：21:20:21" itemprop="dateCreated datePublished" datetime="2022-09-25T11:26:53+08:00">2022-09-25</time>
+              <time title="创建时间：2022-09-25 11:26:53" itemprop="dateCreated datePublished" datetime="2022-09-25T11:26:53+08:00">2022-09-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-05 21:19:40" itemprop="dateModified" datetime="2022-10-05T21:19:40+08:00">2022-10-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -215,6 +221,209 @@
 
 <h2 id="爬虫结果处理"><a href="#爬虫结果处理" class="headerlink" title="爬虫结果处理"></a>爬虫结果处理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">爬虫爬取后的数据要经过筛选与处理，最后保存为爬取结果。</span><br></pre></td></tr></table></figure>
 
+<h1 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h1><h2 id="param-summary-参数概览"><a href="#param-summary-参数概览" class="headerlink" title="param_summary 参数概览"></a>param_summary 参数概览</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARCHAR</td>
+<td>参数类型，static 静态参数，dynamic 动态参数</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>参数名称</td>
+</tr>
+<tr>
+<td>count</td>
+<td>INT</td>
+<td>参数数量</td>
+</tr>
+<tr>
+<td>is_enabled</td>
+<td>BOOLEAN</td>
+<td>是否有效</td>
+</tr>
+</tbody></table>
+<h2 id="param-参数"><a href="#param-参数" class="headerlink" title="param 参数"></a>param 参数</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>参数名称</td>
+</tr>
+<tr>
+<td>content</td>
+<td>VARCHAR</td>
+<td>参数内容</td>
+</tr>
+<tr>
+<td>seq_no</td>
+<td>INT</td>
+<td>序号</td>
+</tr>
+</tbody></table>
+<h2 id="task-任务"><a href="#task-任务" class="headerlink" title="task 任务"></a>task 任务</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARCHAR</td>
+<td>任务类型，collect 数据采集，fight 资源争夺</td>
+</tr>
+<tr>
+<td>name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>static_param</td>
+<td>VARCHAR</td>
+<td>静态参数</td>
+</tr>
+<tr>
+<td>dynamic_param</td>
+<td>VARCHAR</td>
+<td>动态参数</td>
+</tr>
+<tr>
+<td>repeat_times</td>
+<td>INT</td>
+<td>重复次数</td>
+</tr>
+<tr>
+<td>is_enabled</td>
+<td>BOOLEAN</td>
+<td>是否有效</td>
+</tr>
+</tbody></table>
+<h2 id="task-script-任务脚本"><a href="#task-script-任务脚本" class="headerlink" title="task_script 任务脚本"></a>task_script 任务脚本</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>task_name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>content</td>
+<td>VARCHAR</td>
+<td>脚本内容</td>
+</tr>
+</tbody></table>
+<h2 id="task-query-任务请求"><a href="#task-query-任务请求" class="headerlink" title="task_query 任务请求"></a>task_query 任务请求</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>task_name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>static_param</td>
+<td>VARCHAR</td>
+<td>静态参数</td>
+</tr>
+<tr>
+<td>static_seq_no</td>
+<td>INT</td>
+<td>静态参数序号</td>
+</tr>
+<tr>
+<td>dynamic_param</td>
+<td>VARCHAR</td>
+<td>静态参数</td>
+</tr>
+<tr>
+<td>status</td>
+<td>VARCHAR</td>
+<td>请求状态，init 待请求，success 请求成功，failure 请求失败</td>
+</tr>
+<tr>
+<td>remark</td>
+<td>VARCHAR</td>
+<td>备注，失败原因等</td>
+</tr>
+</tbody></table>
+<h2 id="task-result-任务结果"><a href="#task-result-任务结果" class="headerlink" title="task_result 任务结果"></a>task_result 任务结果</h2><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>BIGINT</td>
+<td></td>
+</tr>
+<tr>
+<td>task_name</td>
+<td>VARCHAR</td>
+<td>任务名称</td>
+</tr>
+<tr>
+<td>result</td>
+<td>VARCHAR</td>
+<td>任务结果</td>
+</tr>
+</tbody></table>
+<img src="\assert\puml\a7dd4372c5f70ca0afc6e84959da8bb34e58257c1098250e5537bfe2042fc0f2.svg"/>
+
+
+<p>​<img src="\assert\puml\345eb79bb1b9b975e3bb9e6cdf4795a0195e4c9142ab42ca8835ce4a616fc0d9.svg"/></p>
 
       
     </div>
